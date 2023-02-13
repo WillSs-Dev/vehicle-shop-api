@@ -67,4 +67,26 @@ describe('Car Service implementation', function () {
 
     expect(response).to.be.deep.equal(mockCarResponse);
   });
+
+  it('Should return an error if the car to be updated is not found in the DB', async function () {
+    sinon.stub(CarModel, 'updateById').resolves([]);
+
+    const service = new CarServive();
+    try {
+      await service.updateById(mockMongoId, mockCarRequest);
+    } catch (error) {
+      expect((error as Error).message).to.be.equal('Car not found');
+    }
+  });
+
+  it('Should return an error if the car id to be updated is not a valid mongo id', async function () {
+    sinon.stub(CarModel, 'updateById').resolves(null);
+
+    const service = new CarServive();
+    try {
+      await service.updateById('123InvalidId', mockCarRequest);
+    } catch (error) {
+      expect((error as Error).message).to.be.equal('Invalid mongo id');
+    }
+  });
 });
