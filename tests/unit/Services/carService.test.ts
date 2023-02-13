@@ -39,16 +39,22 @@ describe('Car Service implementation', function () {
     sinon.stub(CarModel, 'getById').resolves([]);
 
     const service = new CarServive();
-    const response = await service.getById(mockMongoId);
-
-    expect(response).to.be.deep.equal({ error: 'Car not found' });
+    try {
+      await service.getById(mockMongoId);
+    } catch (error) {
+      expect((error as Error).message).to.be.equal('Car not found');
+    }
   });
 
   it('Should return an error if the car id is not a valid mongo id', async function () {
     sinon.stub(CarModel, 'getById').resolves(null);
 
     const service = new CarServive();
-    const response = await service.getById('123InvalidId');
+    try {
+      await service.getById('123InvalidId');
+    } catch (error) {
+      expect((error as Error).message).to.be.equal('Invalid mongo id');
+    }
 
     expect(response).to.be.deep.equal({ error: 'Invalid mongo id' });
   });
