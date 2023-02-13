@@ -63,7 +63,7 @@ describe('Car Service implementation', function () {
     sinon.stub(CarModel, 'updateById').resolves(mockCarResponse);
 
     const service = new CarServive();
-    const response = await service.updateById(mockMongoId);
+    const response = await service.updateById(mockMongoId, mockCarRequest);
 
     expect(response).to.be.deep.equal(mockCarResponse);
   });
