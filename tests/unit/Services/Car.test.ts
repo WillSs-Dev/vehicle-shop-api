@@ -51,23 +51,21 @@ describe('Car Service implementation', function () {
     });
   });
 
-  // it('Should update a car by id in the DB', async function () {
-  //   sinon.stub(CarModel, 'updateById').resolves(mockCarResponse);
+  it('Should update a car by id in the DB', async function () {
+    sinon.stub(carModel, 'updateById').resolves(mockCarResponse);
 
-  //   const service = new CarService();
-  //   const response = await service.updateById(mockMongoId, mockCarRequest);
+    const service = new CarService();
+    service.updateById(mockMongoId, mockCarRequest).then((response) => {
+      expect(response).to.be.deep.equal(mockCarResponse);
+    });
+  });
 
-  //   expect(response).to.be.deep.equal(mockCarResponse);
-  // });
+  it('Should return an error if the car to be updated is not found in the DB', async function () {
+    sinon.stub(carModel, 'updateById').resolves(null);
 
-  // it('Should return an error if the car to be updated is not found in the DB', async function () {
-  //   sinon.stub(CarModel, 'updateById').resolves(null);
-
-  //   const service = new CarService();
-  //   try {
-  //     await service.updateById(mockMongoId, mockCarRequest);
-  //   } catch (error) {
-  //     expect((error as Error).message).to.be.equal('Car not found');
-  //   }
-  // });
+    const service = new CarService();
+    service.updateById(mockMongoId, mockCarRequest).catch((err) => {
+      expect(err).to.be.equal('Car not found');
+    });
+  });
 });

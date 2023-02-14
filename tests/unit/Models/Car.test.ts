@@ -64,33 +64,31 @@ describe('Car Model implementation', function () {
     expect(response).to.be.deep.equal(null);
   });
 
-  // it('Should update a car in the DB', async function () {
-  //   sinon
-  //     .stub(Model, 'findByIdAndUpdate')
-  //     .resolves(mockCarResponse);
+  it('Should update a car in the DB', async function () {
+    sinon
+      .stub(Model, 'findByIdAndUpdate')
+      .resolves(mockCarResponse);
 
-  //   const model = new CarModel();
-  //   const response = model.updateById(
-  //     mockMongoId,
-  //     mockCarRequest,
-  //   );
+    const model = new CarModel();
+    model.updateById(
+      mockMongoId,
+      mockCarRequest,
+    ).then((response) => {
+      expect(response).to.be.deep.equal(mockCarResponse);
+    });
+  });
 
-  //   expect(response).to.be.deep.equal(
-  //     mockCarResponse,
-  //   );
-  // });
+  it('Should return null if the car to be updated is not found in the DB', async function () {
+    sinon
+      .stub(Model, 'findByIdAndUpdate')
+      .resolves(null);
 
-  // it('Should return null if the car to be updated is not found in the DB', async function () {
-  //   sinon
-  //     .stub(Model, 'findByIdAndUpdate')
-  //     .resolves(null);
-
-  //   const model = new CarModel();
-  //   const response = model.updateById(
-  //     mockMongoId,
-  //     mockCarRequest,
-  //   );
-
-  //   expect(response).to.be.deep.equal(null);
-  // });
+    const model = new CarModel();
+    model.updateById(
+      mockMongoId,
+      mockCarRequest,
+    ).then((response) => {
+      expect(response).to.be.deep.equal(null);
+    });
+  });
 });
