@@ -6,8 +6,8 @@ export default class Car {
   public year: number;
   public color: string;
   public buyValue: number;
-  private _doorsQty: number;
-  private _seatsQty: number;
+  readonly doorsQty: number;
+  readonly seatsQty: number;
   public status?: boolean;
 
   constructor(car: ICar) {
@@ -16,16 +16,8 @@ export default class Car {
     this.year = car.year;
     this.color = car.color;
     this.buyValue = car.buyValue;
-    this._doorsQty = car.doorsQty;
-    this._seatsQty = car.seatsQty;
+    this.doorsQty = car.doorsQty;
+    this.seatsQty = car.seatsQty;
     this.status = car.status || false;
-  }
-
-  get doorsQty(): number {
-    return this._doorsQty;
-  }
-
-  get seatsQty(): number {
-    return this._seatsQty;
   }
 }
