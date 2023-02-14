@@ -23,4 +23,9 @@ export default class CarService {
     const createdCar = await this.model.register(carData);
     return this.generateDomain(createdCar);
   };
+
+  public getAll = async () => {
+    const cars = await this.model.getAll();
+    return cars.map((car) => this.generateDomain(car));
+  };
 }

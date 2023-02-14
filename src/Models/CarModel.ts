@@ -18,5 +18,7 @@ export default class CarModel {
     this.model = models.Car || model('Car', this.schema);
   }
 
-  public register = async (car: ICar) => this.model.create(car) as Promise<ICar>;
+  public register = async (car: ICar): Promise<ICar> => this.model.create(car);
+
+  public getAll = async (): Promise<ICar[]> => this.model.find();
 }
