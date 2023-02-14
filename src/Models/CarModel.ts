@@ -18,5 +18,5 @@ export default class CarModel {
     this.model = models.Car || model('Car', this.schema);
   }
 
-  public register = async (car: ICar) => this.model.create(car);
+  public register = async (car: ICar) => this.model.create(car) as Promise<ICar>;
 }
