@@ -9,10 +9,25 @@ export default class CarService {
     this.model = new CarModel();
   }
 
+  private generateDomain = (newCar: ICar) => {
+    const carDomain = new Car(newCar);
+    return {
+      id: carDomain.id,
+      model: carDomain.model,
+      year: carDomain.year,
+      color: carDomain.color,
+      buyValue: carDomain.buyValue,
+      doorsQty: carDomain.doorsQty,
+      seatsQty: carDomain.seatsQty,
+      status: carDomain.status,
+    };
+  };
+
   public register = async (carRequest: ICar) => {
     const { status } = carRequest;
     const carData = { ...carRequest, status: status || false };
     const createdCar = await this.model.register(carData);
-    return new Car(createdCar);
+    const newCar = new Car(createdCar);
+    return this.generateDomain(newCar);
   };
 }
