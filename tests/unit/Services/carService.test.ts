@@ -14,7 +14,7 @@ describe('Car Service implementation', function () {
   const carModel = new CarModel();
 
   it('Should register a car in the DB', async function () {
-  sinon.stub(carModel, 'register').resolves(mockCarResponse);
+    sinon.stub(carModel, 'register').resolves(mockCarResponse);
 
     const service = new CarService();
     const response = await service.register(mockCarRequest);
