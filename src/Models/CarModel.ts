@@ -21,4 +21,6 @@ export default class CarModel {
   public register = async (car: ICar): Promise<ICar> => this.model.create(car);
 
   public getAll = async (): Promise<ICar[]> => this.model.find();
+
+  public getById = async (id: string): Promise<ICar | null> => this.model.findById(id);
 }

@@ -28,4 +28,10 @@ export default class CarService {
     const cars = await this.model.getAll();
     return cars.map((car) => this.generateDomain(car));
   };
+
+  public getById = async (id: string) => {
+    const car = await this.model.getById(id);
+    if (!car) throw new Error('Car not found');
+    return this.generateDomain(car);
+  };
 }
