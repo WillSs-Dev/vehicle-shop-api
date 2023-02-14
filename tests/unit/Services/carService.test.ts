@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import CarService from '../../../src/Services/CarService';
 import CarModel from '../../../src/Models/CarModel';
 import {
-  // mockCarListResponse,
+  mockCarListResponse,
   mockCarRequest,
   mockCarResponse,
   // mockMongoId,
@@ -12,7 +12,7 @@ import {
 
 describe('Car Service implementation', function () {
   const carModel = new CarModel();
-
+  
   it('Should register a car in the DB', async function () {
     sinon.stub(carModel, 'register').resolves(mockCarResponse);
 
@@ -22,15 +22,14 @@ describe('Car Service implementation', function () {
     expect(response).to.be.deep.equal(mockCarResponse);
   });
 
-  // it('Should list all cars in the DB', async function () {
-  //   sinon.stub(carModel, 'getAll').resolves(mockCarListResponse);
+  it('Should list all cars in the DB', async function () {
+    sinon.stub(carModel, 'getAll').resolves(mockCarListResponse);
 
-  //   const service = new CarService();
-  //   const response = await service.getAll();
-
-  //   expect(response).to.be.deep.equal(mockCarListResponse);
-  // });
-
+    const service = new CarService();
+    service.getAll().then((response) => {
+      expect(response).to.be.deep.equal(mockCarListResponse);
+    });
+  });
   // it('Should list a car by id in the DB', async function () {
   //   sinon.stub(CarModel, 'getById').resolves(mockCarResponse);
 
