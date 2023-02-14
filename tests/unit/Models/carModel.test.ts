@@ -60,17 +60,6 @@ describe('Car Model implementation', function () {
   //   expect(response).to.be.deep.equal([]);
   // });
 
-  // it('Should return null if the car id is not a valid mongo id', async function () {
-  //   sinon.stub(Model, 'findById').resolves(null);
-
-  //   const model = new CarModel();
-  //   const response = model.getById(
-  //     '123InvalidId',
-  //   );
-
-  //   expect(response).to.be.deep.equal(null);
-  // });
-
   // it('Should update a car in the DB', async function () {
   //   sinon
   //     .stub(Model, 'findByIdAndUpdate')
@@ -99,19 +88,5 @@ describe('Car Model implementation', function () {
   //   );
 
   //   expect(response).to.be.deep.equal([]);
-  // });
-
-  // it('Should return null if the car id to be updated is not a valid mongo id', async function () {
-  //   sinon
-  //     .stub(Model, 'findByIdAndUpdate')
-  //     .resolves(null);
-
-  //   const model = new CarModel();
-  //   const response = model.updateById(
-  //     '123InvalidId',
-  //     mockCarRequest,
-  //   );
-
-  //   expect(response).to.be.deep.equal(null);
   // });
 });
