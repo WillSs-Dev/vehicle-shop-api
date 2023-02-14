@@ -13,4 +13,7 @@ carRouter.get('/', (req, res, next) =>
 carRouter.get('/:id', validateId, (req, res, next) =>
   new CarController(req, res, next).getById());
 
+carRouter.put('/:id', validateId, (req, res, next) =>
+  new CarController(req, res, next).updateById());
+
 export default carRouter;

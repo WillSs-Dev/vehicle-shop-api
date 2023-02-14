@@ -34,4 +34,11 @@ export default class CarService {
     if (!car) throw new Error('Car not found');
     return this.generateDomain(car);
   };
+
+  public updateById = async (id: string, carRequest: ICar) => {
+    const car = await this.model.getById(id);
+    if (!car) throw new Error('Car not found');
+    const updatedCar = await this.model.updateById(id, carRequest);
+    return this.generateDomain(updatedCar as ICar);
+  };
 }

@@ -29,4 +29,15 @@ export default class CarController {
       return this.res.status(404).json({ message: (err as Error).message });
     }
   };
+
+  public updateById = async () => {
+    const { id } = this.req.params;
+    const carRequest = this.req.body as ICar;
+    try {
+      const updatedCar = await this.service.updateById(id, carRequest);
+      return this.res.status(200).json(updatedCar);
+    } catch (err) {
+      return this.res.status(404).json({ message: (err as Error).message });
+    }
+  };
 }

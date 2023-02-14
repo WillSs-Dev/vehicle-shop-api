@@ -23,4 +23,7 @@ export default class CarModel {
   public getAll = async (): Promise<ICar[]> => this.model.find();
 
   public getById = async (id: string): Promise<ICar | null> => this.model.findById(id);
+
+  public updateById = async (id: string, carData: ICar): Promise<ICar | null> =>
+    this.model.findByIdAndUpdate(id, { $set: carData }, { new: true });
 }
