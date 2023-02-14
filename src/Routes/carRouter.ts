@@ -2,15 +2,15 @@ import { Router } from 'express';
 import CarController from '../Controllers/CarController';
 import validateId from '../Middlewares/ValidateId';
 
-const carRouter = Router();
+const CarRouter = Router();
 
-carRouter.post('/', (req, res, next) =>
+CarRouter.post('/', (req, res, next) =>
   new CarController(req, res, next).register());
 
-carRouter.get('/', (req, res, next) =>
+CarRouter.get('/', (req, res, next) =>
   new CarController(req, res, next).getAll());
 
-carRouter.get('/:id', validateId, (req, res, next) =>
+CarRouter.get('/:id', validateId, (req, res, next) =>
   new CarController(req, res, next).getById());
 
-export default carRouter;
+export default CarRouter;
