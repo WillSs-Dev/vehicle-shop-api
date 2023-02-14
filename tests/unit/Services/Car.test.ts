@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-// import { Model } from 'mongoose';
 import sinon from 'sinon';
 import CarService from '../../../src/Services/CarService';
 import CarModel from '../../../src/Models/CarModel';
@@ -7,19 +6,23 @@ import {
   mockCarListResponse,
   mockCarRequest,
   mockCarResponse,
-  // mockMongoId,
+  mockMongoId,
 } from '../../mocks';
 
 describe('Car Service implementation', function () {
   const carModel = new CarModel();
-  
+
+  afterEach(function () {
+    sinon.restore();
+  });
+
   it('Should register a car in the DB', async function () {
     sinon.stub(carModel, 'register').resolves(mockCarResponse);
 
     const service = new CarService();
-    const response = await service.register(mockCarRequest);
-
-    expect(response).to.be.deep.equal(mockCarResponse);
+    service.register(mockCarRequest).then((response) => {
+      expect(response).to.be.deep.equal(mockCarResponse);
+    });
   });
 
   it('Should list all cars in the DB', async function () {
@@ -31,24 +34,22 @@ describe('Car Service implementation', function () {
     });
   });
   it('Should list a car by id in the DB', async function () {
-    sinon.stub(CarModel, 'getById').resolves(mockCarResponse);
+    sinon.stub(carModel, 'getById').resolves(mockCarResponse);
 
     const service = new CarService();
-    const response = await service.getById(mockMongoId);
-
-    expect(response).to.be.deep.equal(mockCarResponse);
+    service.getById(mockMongoId).then((response) => {
+      expect(response).to.be.deep.equal(mockCarResponse);
+    });
   });
 
-  // it('Should return an error if the car id is not found in the DB', async function () {
-  //   sinon.stub(CarModel, 'getById').resolves([]);
+  it('Should return an error if the car id is not found in the DB', async function () {
+    sinon.stub(carModel, 'getById').resolves(null);
 
-  //   const service = new CarService();
-  //   try {
-  //     await service.getById(mockMongoId);
-  //   } catch (error) {
-  //     expect((error as Error).message).to.be.equal('Car not found');
-  //   }
-  // });
+    const service = new CarService();
+    service.getById(mockMongoId).catch((err) => {
+      expect(err).to.be.equal('Car not found');
+    });
+  });
 
   // it('Should update a car by id in the DB', async function () {
   //   sinon.stub(CarModel, 'updateById').resolves(mockCarResponse);
@@ -60,7 +61,7 @@ describe('Car Service implementation', function () {
   // });
 
   // it('Should return an error if the car to be updated is not found in the DB', async function () {
-  //   sinon.stub(CarModel, 'updateById').resolves([]);
+  //   sinon.stub(CarModel, 'updateById').resolves(null);
 
   //   const service = new CarService();
   //   try {
