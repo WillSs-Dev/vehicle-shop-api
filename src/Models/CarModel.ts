@@ -1,11 +1,13 @@
 import { model, Model, models, Schema } from 'mongoose';
 import ICar from '../Interfaces/ICar';
+import AbstractODM from './AbstractODM';
 
-export default class CarModel {
+export default class CarModel extends AbstractODM {
   private model: Model<ICar>;
   private schema: Schema;
 
   constructor() {
+    super();
     this.schema = new Schema<ICar>({
       model: { type: String, required: true },
       year: { type: Number, required: true },
