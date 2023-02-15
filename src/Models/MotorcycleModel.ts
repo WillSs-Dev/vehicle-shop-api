@@ -24,12 +24,14 @@ export default class MotorcycleModel {
   public register = async (motorcycle: IMotorcycle): Promise<IMotorcycle> =>
     this.model.create(motorcycle);
 
-  // public getAll(): Promise<IVehicle[]>;
+  public getAll = async (): Promise<IMotorcycle[]> => this.model.find();
 
-  // public getById(id: string): Promise<IVehicle | null>;
+  public getById = async (id: string): Promise<IMotorcycle | null> =>
+    this.model.findById(id);
 
-  // public updateById(
-  //   id: string,
-  //   vehicleData: IVehicle,
-  // ): Promise<IVehicle | null>;
+  public updateById = async (
+    id: string,
+    motorcycleData: IMotorcycle,
+  ): Promise<IMotorcycle | null> =>
+    this.model.findByIdAndUpdate(id, { $set: motorcycleData }, { new: true });
 }
