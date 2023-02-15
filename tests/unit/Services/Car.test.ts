@@ -47,7 +47,7 @@ describe('Car Service implementation', function () {
 
     const service = new CarService();
     service.getById(mockMongoId).catch((err) => {
-      expect(err).to.be.equal('Car not found');
+      expect((err as Error).message).to.be.equal('Car not found');
     });
   });
 
@@ -65,7 +65,7 @@ describe('Car Service implementation', function () {
 
     const service = new CarService();
     service.updateById(mockMongoId, mockCarRequest).catch((err) => {
-      expect(err).to.be.equal('Car not found');
+      expect((err as Error).message).to.be.equal('Car not found');
     });
   });
 });
