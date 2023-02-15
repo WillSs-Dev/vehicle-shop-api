@@ -1,24 +1,20 @@
-import { model, Model, models, Schema } from 'mongoose';
 import IMotorcycle from '../Interfaces/IMotorcycle';
-// import AbstractODM from './AbstractODM';
+import AbstractODM from './AbstractODM';
 
-export default class MotorcycleModel {
-  private model: Model<IMotorcycle>;
-  private schema: Schema;
-
+export default class MotorcycleModel extends AbstractODM<IMotorcycle> {
   constructor() {
-    // super();
-    this.schema = new Schema<IMotorcycle>({
-      model: { type: String, required: true },
-      year: { type: Number, required: true },
-      color: { type: String, required: true },
-      buyValue: { type: Number, required: true },
-      category: { type: String, required: true },
-      engineCapacity: { type: Number, required: true },
-      status: { type: Boolean, required: false, default: false },
-    });
-
-    this.model = models.Motorcycle || model('Motorcycle', this.schema);
+    super(
+      {
+        model: { type: String, required: true },
+        year: { type: Number, required: true },
+        color: { type: String, required: true },
+        buyValue: { type: Number, required: true },
+        category: { type: String, required: true },
+        engineCapacity: { type: Number, required: true },
+        status: { type: Boolean, required: false, default: false },
+      },
+      'Motorcycle',
+    );
   }
 
   public register = async (motorcycle: IMotorcycle): Promise<IMotorcycle> =>
