@@ -28,4 +28,18 @@ export default class MotorcycleController {
       return this.res.status(404).json({ message: (err as Error).message });
     }
   };
+
+  public updateById = async () => {
+    const { id } = this.req.params;
+    const motorcycleRequest = this.req.body;
+    try {
+      const updatedMotorcycle = await this.service.updateById(
+        id,
+        motorcycleRequest,
+      );
+      return this.res.status(200).json(updatedMotorcycle);
+    } catch (err) {
+      return this.res.status(404).json({ message: (err as Error).message });
+    }
+  };
 }

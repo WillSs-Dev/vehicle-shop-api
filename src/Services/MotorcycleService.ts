@@ -26,4 +26,10 @@ export default class MotorcycleService {
     if (!motorcycle) throw new Error('Motorcycle not found');
     return this.generateDomain(motorcycle);
   };
+
+  public updateById = async (id: string, motorcycleData: IMotorcycle): Promise<Motorcycle> => {
+    const updatedMotorcycle = await this.model.updateById(id, motorcycleData);
+    if (!updatedMotorcycle) throw new Error('Motorcycle not found');
+    return this.generateDomain(updatedMotorcycle);
+  };
 }
