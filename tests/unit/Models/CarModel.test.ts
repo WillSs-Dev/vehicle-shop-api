@@ -10,6 +10,8 @@ import {
 } from '../../mocks';
 
 describe('Car Model implementation', function () {
+  const model = new CarModel();
+
   afterEach(function () {
     sinon.restore();
   });
@@ -19,7 +21,6 @@ describe('Car Model implementation', function () {
       .stub(Model, 'create')
       .resolves(mockCarResponse);
 
-    const model = new CarModel();
     const response = await model.register(
       mockCarRequest,
     );
@@ -34,7 +35,6 @@ describe('Car Model implementation', function () {
       .stub(Model, 'find')
       .resolves(mockCarListResponse);
 
-    const model = new CarModel();
     const response = await model.getAll();
 
     expect(response).to.be.deep.equal(
@@ -47,7 +47,6 @@ describe('Car Model implementation', function () {
       .stub(Model, 'findById')
       .resolves(mockCarResponse);
 
-    const model = new CarModel();
     const response = await model.getById(mockMongoId);
 
     expect(response).to.be.deep.equal(
@@ -58,7 +57,6 @@ describe('Car Model implementation', function () {
   it('Should return null if the car id is not found in the DB', async function () {
     sinon.stub(Model, 'findById').resolves(null);
 
-    const model = new CarModel();
     const response = await model.getById(mockMongoId);
 
     expect(response).to.be.deep.equal(null);
@@ -69,7 +67,6 @@ describe('Car Model implementation', function () {
       .stub(Model, 'findByIdAndUpdate')
       .resolves(mockCarResponse);
 
-    const model = new CarModel();
     model.updateById(
       mockMongoId,
       mockCarRequest,
@@ -83,7 +80,6 @@ describe('Car Model implementation', function () {
       .stub(Model, 'findByIdAndUpdate')
       .resolves(null);
 
-    const model = new CarModel();
     model.updateById(
       mockMongoId,
       mockCarRequest,
