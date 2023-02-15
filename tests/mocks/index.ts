@@ -42,3 +42,47 @@ export const mockCarListResponse = [
 ];
 
 export const mockMongoId = '634852326b35b59438fbea31';
+
+export const mockMotorcycleRequest = {
+  model: 'Honda Cb 600f Hornet',
+  year: 2014,
+  color: 'Red',
+  status: true,
+  buyValue: 45.0,
+  category: 'Street',
+  engineCapacity: 600,
+};
+
+export const mockMotorcycleResponse = {
+  id: '634852326b35b59438fbea2f',
+  model: 'Honda Cb 600f Hornet',
+  year: 2014,
+  color: 'Red',
+  status: true,
+  buyValue: 45.0,
+  category: 'Street',
+  engineCapacity: 600,
+};
+
+export const mockMotorcycleListResponse = [
+  {
+    id: '634852326b35b59438fbea2f',
+    model: 'Honda Cb 650f Hornet',
+    year: 2005,
+    color: 'Yellow',
+    status: true,
+    buyValue: 30.0,
+    category: 'Street',
+    engineCapacity: 600,
+  },
+  {
+    id: '634852326b35b59438fbea31',
+    model: 'Honda Cbr 1000rr',
+    year: 2011,
+    color: 'Orange',
+    status: true,
+    buyValue: 59.9,
+    category: 'Street',
+    engineCapacity: 1000,
+  },
+];
