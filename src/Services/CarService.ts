@@ -8,13 +8,7 @@ export default class CarService {
   constructor() {
     this.model = new CarModel();
   }
-
-  // private generateDomain = (newCar: ICar) => {
-  //   const newA = new Car(newCar);
-  //   console.log(newA);
-  //   return newA;
-  // };
-
+  
   private generateDomain = (newCar: ICar) => new Car(newCar);
 
   public register = async (carRequest: ICar): Promise<Car> => {
